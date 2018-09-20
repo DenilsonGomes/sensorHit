@@ -9,14 +9,24 @@
 #include <Arduino.h>
 
 //Variaveis e Constantes
-int led = 3;
-int sensor = 2;
-int valor;
+int Led = 3;// Pino do led
+int Shock = 2;// Pino do sensor
+int val;
 
-void setup() {
-    // put your setup code here, to run once:
+void setup () {
+ Serial.begin(9600); //Inicia comunicação serial
+ pinMode(Led, OUTPUT); //Pino led como saida
+ pinMode(Shock, INPUT); //Pino sensor como entrada
 }
 
-void loop() {
-    // put your main code here, to run repeatedly:
+void loop () {
+ val = digitalRead (Shock);// Atribui o valor do sensor para val
+ Serial.println(val); //Exibe o val
+ if (val) {// Se val
+  digitalWrite(Led, LOW); //Apaga o led
+ }
+ else {//Caso contrario
+  digitalWrite(Led, HIGH);//Acende o led
+ }
+delay(2000);//Espera 2 segundos
 }
